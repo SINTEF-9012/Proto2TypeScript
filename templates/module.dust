@@ -1,0 +1,10 @@
+declare module {package} {
+	interface AProtoBufJS {
+		toArrayBuffer(): ArrayBuffer;
+		toBuffer(): NodeBuffer;
+		toBase64(): string;
+		toString(): string;
+	}
+}
+{#messages}
+{>interface:./}{/messages}

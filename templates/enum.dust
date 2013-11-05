@@ -1,0 +1,7 @@
+declare module {fullPackageName} {
+
+	export enum {name} {
+		{#values}
+		{name} = {id},{/values}
+	}	
+}
