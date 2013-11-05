@@ -1,0 +1,3 @@
+message Hello {
+	required string value = 1;
+}

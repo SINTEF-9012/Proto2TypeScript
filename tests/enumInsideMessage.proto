@@ -1,0 +1,12 @@
+message First {
+	optional int32 id = 1;
+	optional Colors content = 2;
+
+	enum Colors {
+		RED = 1,
+		YELLOW = 2,
+		GREEN = 3,
+		BLUE = 4
+	}
+}
+

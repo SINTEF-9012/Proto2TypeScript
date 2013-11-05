@@ -1,0 +1,9 @@
+message Types {
+	optional double a = 1;
+	optional uint32 b = 2;
+	optional string c = 3;
+	optional int64 d = 4;
+	optional uint64 e = 5;
+	optional bool f = 6;
+	optional bytes g = 7;
+}

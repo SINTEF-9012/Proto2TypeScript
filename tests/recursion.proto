@@ -1,0 +1,15 @@
+message A {
+	repeated B content = 1;
+
+	message B {
+		repeated C content = 1;
+
+		message C {
+			repeated D content = 1;
+
+			message D {
+				required int64 value = 1;
+			}
+		}
+	}
+}

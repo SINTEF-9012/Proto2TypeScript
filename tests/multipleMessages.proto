@@ -1,0 +1,8 @@
+message First {
+	optional int32 id = 1;
+	optional Second content = 2;
+}
+
+message Second {
+	optional string value = 1;
+}

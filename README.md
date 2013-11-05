@@ -1,7 +1,7 @@
 Proto2TypeScript
 ================
 
-This tool generate TypeScript definitions for your Protocol Buffers models, when you use [ProtoBuf.js](https://github.com/dcodeIO/ProtoBuf.js/)
+This tool generate TypeScript definitions for your Protocol Buffers models, when you use the excellent [ProtoBuf.js](https://github.com/dcodeIO/ProtoBuf.js/) library.
 
 It's a Node.js project, but a web demo is coming.
 

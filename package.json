@@ -5,5 +5,8 @@
     "protobufjs": "~1.1.9",
     "dustjs-linkedin": "~2.0.3",
     "optimist": "~0.6.0"
+  },
+  "devDependencies": {
+    "expect.js": "~0.2.0"
   }
 }

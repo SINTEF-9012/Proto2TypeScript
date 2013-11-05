@@ -1,0 +1,3 @@
+message Repeated {
+	repeated int32 numbers = 1;
+}

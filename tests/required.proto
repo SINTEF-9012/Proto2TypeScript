@@ -1,0 +1,3 @@
+message Required {
+	required int32 value = 1;
+}

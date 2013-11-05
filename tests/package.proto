@@ -1,0 +1,5 @@
+package Complex;
+
+message Hello {
+	required string value = 1;
+}
