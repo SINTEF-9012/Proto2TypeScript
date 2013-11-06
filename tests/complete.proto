@@ -1,0 +1,175 @@
+package LSTransmission;
+
+// It's a WGS 84 location
+message LatLng {
+	required double lat = 1;
+	required double lng = 2;
+}
+
+message AgeModel {
+	optional uint32 Value = 1;
+	optional string Unit = 2;
+}
+
+message BloodPressureModel {
+	optional int32 SystolicBloodPressure = 1;
+	optional int32 DiastolicBloodPressure = 2;
+}
+
+message VitalSignsModel {
+	optional BloodPressureModel BloodPressure = 1;
+	optional int32 PulseRate = 2;
+	optional int32 RespiratoryRate = 3;
+	optional double Temperature = 4;
+	optional uint64 DateTime = 5;
+}
+
+message TriageInfoModel {
+	optional string ReportProviderId = 1;
+	optional string ReportId = 2;
+	optional uint64 ReportDateTime = 3;
+}
+
+
+message HelpBeaconModel {
+	required string HelpBeaconID = 1;
+	optional string BasicID = 2;
+	optional string Message = 3;
+	optional uint64 LastScanDateTime = 4;
+	optional bool Notified = 5;
+	optional bool Rescued  = 6;
+	optional bool Safe = 7;
+
+	optional uint64 AdvertisedDateTime = 8;
+	optional string Name = 9;
+	optional string Imei = 10;
+	optional string Source = 11;
+	optional uint64 Time = 12;
+
+	optional LatLng Location = 13;
+
+	message DictionaryEntry {
+		required string key = 1;
+		required string value = 2;
+	}
+
+//	repeated HelpBeaconModel.DictionaryEntry DistributionDictionay = 14;
+	repeated DictionaryEntry DistributionDictionay = 14;
+}
+
+message IncidentObjectModel {
+	required string GraphicID = 1;
+	optional string GraphicValue = 2;
+	optional string Description = 3;
+
+	optional LatLng GraphicMinPosition = 4;
+	optional LatLng GraphicMaxPosition = 5;
+
+	repeated LatLng LinearRingPointList = 6;
+}
+
+message MediaModel {
+	optional string Title = 1;
+	optional uint64 AvailableDateTime = 2;
+	repeated string Tags = 3;
+	optional string LocalFileUriString = 4;
+	optional string UriString = 5;
+	optional int32 Type = 6;
+	optional LatLng Location = 7;
+	optional string Description = 8;
+	optional string Author = 9;
+	optional string SubeventKeywords = 10;
+	optional string GroupName = 11;
+}
+
+message MessengerModel {
+	required string MessageID = 1;
+	optional string SenderID = 2;
+	optional string ActionPlan = 3;
+	optional uint64 SentDateTime = 4;
+}
+
+message PatientModel {
+	required string Id = 1;
+	optional TriageInfoModel TriageInfo = 2;
+	optional AgeModel Age = 3;
+	optional string Sex = 4;
+	optional TriageStatusEnum TriageStatus = 5;
+	optional string IncidentId = 6;
+	optional LatLng Location = 7;
+	optional string PersonalIdNumber = 8;
+	repeated VitalSignsModel VitalSigns = 9;
+	optional string TransferredToDestination = 10;
+	optional bool Transporting = 11;
+
+	enum TriageStatusEnum {
+		RED = 1;
+		YELLOW = 2;
+		GREEN = 3;
+		BLACK = 4;
+		WHITE = 5;
+	}
+}
+
+
+message ResourceMobilizationModel {
+	required string ResourceMobilizationID = 1;
+	optional LatLng Location = 2;
+	optional string Task = 3;
+	optional int32 NumberOfFireVehicles = 4;
+	optional int32 NumberOfFirePersonnel = 5;
+	optional int32 NumberOfMedicVehicles = 6;
+	optional int32 NumberOfMedicPersonnel = 7;
+	optional int32 NumberOfPoliceVehicles = 8;
+	optional int32 NumberOfPolicePersonnel = 9;
+}
+
+message ResourceStatusModel {
+	required string ResourceID = 1;
+	optional string type = 2;
+	optional string Assignment = 3;
+	optional string Name = 4;
+	optional string Status = 5;
+	optional LatLng Location = 6;
+}
+
+
+
+message Error {
+	required Status status = 1;
+	optional string message = 2;
+	enum Status {
+		BANANA = 1;
+		LINKSMART_ERROR = 2;
+		LSCOMM_ERROR = 3;
+		LSTRANSMISSION_ERROR = 4;
+		GENERIC_ERROR = 5;
+		CLIENT_ERROR = 6;
+	}
+}
+
+// The transaction is the same in both ways
+// The client and the server use same messages
+message Transaction {
+
+	message Content {
+		repeated HelpBeaconModel HelpBeaconList = 1;
+		repeated IncidentObjectModel IncidentObjectList = 2;
+		repeated MediaModel MediaList = 3;
+		repeated MessengerModel MessengerList = 4;
+		repeated PatientModel PatientList = 5;
+		repeated ResourceMobilizationModel ResourceMobilizationList = 6;
+		repeated ResourceStatusModel ResourceStatusList = 7;
+	}
+
+	// Elements to publish 
+	optional Content PublishList = 1;
+
+	// Elements to remove
+	optional Content RemoveList = 2;
+
+	// This will be empty in general if everything
+	// works fine
+	repeated Error ErrorList = 3;
+}
+

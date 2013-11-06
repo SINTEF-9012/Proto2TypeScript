@@ -101,7 +101,7 @@ function generateNames (model : any, prefix : string, name : string = "") : void
 	for (var key in model.messages) {
 		var message = model.messages[key];
 		newDefinitions[message.name] = true;
-		generateNames(message,prefix, "."+(model.name ? model.name : ""));
+		generateNames(message,model.fullPackageName, "."+(model.name ? model.name : ""));
 	}
 
 	// Generate names for enums
@@ -129,6 +129,11 @@ loadDustTemplate("enum");
 
 // Load the json file
 var	model = JSON.parse(fs.readFileSync(argv.file).toString());
+
+// If a packagename isn't present, use a default package name
+if (!model.package) {
+	model.package = "Proto2TypeScript";
+}
 
 // Generates the names of the model
 generateNames(model, model.package);

@@ -3,12 +3,10 @@ Proto2TypeScript
 
 This tool generate TypeScript definitions for your Protocol Buffers models, when you use the excellent [ProtoBuf.js](https://github.com/dcodeIO/ProtoBuf.js/) library.
 
-It's a Node.js project, but a web demo is coming.
-
 ### Usage
 ```sh
 # Install the dependencies
-npm install
+npm install --production
 
 # Parse and convert the proto file to json using proto2js (from ProtoBuf.js)
 node_modules/protobufjs/bin/proto2js model.proto > model.json
@@ -25,6 +23,10 @@ Options:
   -u, --underscoreGetSet  Generate getter and setters in underscore notation  [default: false]
   -p, --properties        Generate properties                                 [default: true]
 ```
+
+### Requirements
+
+It is a Node.js project. The sourcecode is written in TypeScript, but the JavaScript output is present in the repository. You need Bash if you want to run the tests.
 
 ### Acknowledgements
 

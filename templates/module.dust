@@ -1,7 +1,7 @@
 declare module {package} {
 	interface AProtoBufJS {
 		toArrayBuffer(): ArrayBuffer;
-		toBuffer(): NodeBuffer;
+		//toBuffer(): Buffer;
 		toBase64(): string;
 		toString(): string;
 	}
