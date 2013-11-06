@@ -24,6 +24,12 @@ Options:
   -p, --properties        Generate properties                                 [default: true]
 ```
 
+### Why ?
+
+Because intelligent code completion is cool :-)
+
+![](http://i.imgur.com/evVnEM5.png "Example in sublime text")
+
 ### Requirements
 
 It is a Node.js project. The sourcecode is written in TypeScript, but the JavaScript output is present in the repository.
