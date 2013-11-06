@@ -100,14 +100,14 @@ function generateNames (model : any, prefix : string, name : string = "") : void
 	// Recursive call for all messages
 	for (var key in model.messages) {
 		var message = model.messages[key];
-		newDefinitions[message.name] = true;
+		newDefinitions[message.name] = "Builder";
 		generateNames(message,model.fullPackageName, "."+(model.name ? model.name : ""));
 	}
 
 	// Generate names for enums
 	for (var key in model.enums) {
 		var _enum = model.enums[key];
-		newDefinitions[_enum.name] = true;
+		newDefinitions[_enum.name] = "";
 		_enum.fullPackageName = model.fullPackageName + (model.name ? "."+model.name : "");
 	}
 
@@ -115,17 +115,25 @@ function generateNames (model : any, prefix : string, name : string = "") : void
 	// update the field type in consequence
 	for (var key in model.fields) {
 		var field = model.fields[key];
-		if (newDefinitions[field.type]) {
+		if (typeof newDefinitions[field.type] !== "undefined") {
 			
 			field.type = model.name + "." + field.type;
 		}
 	}
+
+	// Add the new definitions in the model for generate builders
+	var definitions: any[] = [];
+	for (var key in newDefinitions) {
+		definitions.push({name: key, type: ((model.name ? (model.name + ".") : "") + key)+newDefinitions[key]});
+	}
+	model.definitions = definitions;
 }
 
 // Load dust templates
 loadDustTemplate("module");
 loadDustTemplate("interface");
 loadDustTemplate("enum");
+loadDustTemplate("builder");
 
 // Load the json file
 var	model = JSON.parse(fs.readFileSync(argv.file).toString());

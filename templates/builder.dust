@@ -1,0 +1,9 @@
+export interface {name}Builder {
+		new(): {name};
+		decode(buffer: ArrayBuffer) : {name};
+		//decode(buffer: NodeBuffer) : {name};
+		//decode(buffer: ByteArrayBuffer) : {name};
+		decode64(buffer: string) : {name};
+		{#definitions}{name}: {type};
+		{/definitions}
+	}

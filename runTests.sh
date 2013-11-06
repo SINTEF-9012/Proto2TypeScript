@@ -2,7 +2,6 @@
 
 set -e # abort on the first error
 
-
 for f in tests/*.proto
 do
 	fileName=${f%.*}
@@ -15,9 +14,14 @@ do
 
 	# Run the TypeScript compiler and let see if it's ok
 	tsc -out /dev/null $fileName.d.ts
-
-	# Run more tests in JavaScript
 done
 
+echo "Conversion OK"
 
-echo OK
+# The compilation is a part of the tests
+tsc tests.ts --module commonjs
+echo "Compilation OK"
+
+# Run the unit tests
+echo "Running mocha tests"
+mocha tests.js

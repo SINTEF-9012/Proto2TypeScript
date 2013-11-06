@@ -1,6 +1,6 @@
 declare module {fullPackageName} {
 
-	export interface {name} extends AProtoBufJS {
+	export interface {name} extends ProtoBufModel {
 		{#fields}{#properties}{name}{rule|optionalFieldDeclaration}: {type|convertType}{rule|repeatedType};
 		{/properties}{#camelCaseGetSet}get{name|firstLetterInUpperCase}() : {type|convertType}{rule|repeatedType};
 		set{name|firstLetterInUpperCase}({name|firstLetterInLowerCase} : {type|convertType}{rule|repeatedType}): void;
@@ -8,7 +8,9 @@ declare module {fullPackageName} {
 		get_{name}() : {type|convertType}{rule|repeatedType};
 		set_{name}({name|firstLetterInLowerCase} : {type|convertType}{rule|repeatedType}): void;
 		{/underscoreGetSet}{/fields}
-	}	
+	}
+	
+	{>builder:./}	
 }
 {#messages}
 {>interface:./}{/messages}{#enums}

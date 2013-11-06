@@ -26,7 +26,9 @@ Options:
 
 ### Requirements
 
-It is a Node.js project. The sourcecode is written in TypeScript, but the JavaScript output is present in the repository. You need Bash if you want to run the tests.
+It is a Node.js project. The sourcecode is written in TypeScript, but the JavaScript output is present in the repository.
+
+If you want  to run the tests, you need bash, mocha and typescript.
 
 ### Acknowledgements
 
