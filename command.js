@@ -3,7 +3,7 @@
 var argv = require('optimist').usage('Convert a ProtoBuf.js JSON description in TypeScript definitions.\nUsage: $0').demand('f').alias('f', 'file').describe('f', 'The JSON file').boolean('c').alias('c', 'camelCaseGetSet').describe('c', 'Generate getter and setters in camel case notation').default('c', true).boolean('u').alias('u', 'underscoreGetSet').describe('u', 'Generate getter and setters in underscore notation').default('u', false).boolean('p').alias('p', 'properties').describe('p', 'Generate properties').default('p', true).argv;
 
 // Import in typescript and commondjs style
-var ProtoBuf = require("protobufjs");
+//var ProtoBuf = require("protobufjs");
 var DustJS = require("dustjs-linkedin");
 var fs = require("fs");
 
@@ -15,12 +15,10 @@ DustJS.optimizers.format = function (ctx, node) {
 // Create view filters
 DustJS.filters["firstLetterInUpperCase"] = function (value) {
     return value.charAt(0).toUpperCase() + value.slice(1);
-    ;
 };
 
 DustJS.filters["firstLetterInLowerCase"] = function (value) {
     return value.charAt(0).toLowerCase() + value.slice(1);
-    ;
 };
 
 DustJS.filters["convertType"] = function (value) {
@@ -30,7 +28,6 @@ DustJS.filters["convertType"] = function (value) {
         case 'bool':
             return 'boolean';
         case 'bytes':
-            // TODO check this
             return 'ArrayBuffer';
         case 'double':
         case 'float':
@@ -60,7 +57,7 @@ DustJS.filters["repeatedType"] = function (value) {
 };
 
 function loadDustTemplate(name) {
-    var template = fs.readFileSync("./templates/" + name + ".dust", "UTF8"), compiledTemplate = DustJS.compile(template, name);
+    var template = fs.readFileSync("./templates/" + name + ".dust", "UTF8").toString(), compiledTemplate = DustJS.compile(template, name);
 
     DustJS.loadSource(compiledTemplate);
 }
@@ -77,19 +74,22 @@ function generateNames(model, prefix, name) {
 
     var newDefinitions = {};
 
-    for (var key in model.messages) {
+    // Generate names for messages
+    // Recursive call for all messages
+    var key;
+    for (key in model.messages) {
         var message = model.messages[key];
         newDefinitions[message.name] = "Builder";
         generateNames(message, model.fullPackageName, "." + (model.name ? model.name : ""));
     }
 
-    for (var key in model.enums) {
-        var _enum = model.enums[key];
-        newDefinitions[_enum.name] = "";
-        _enum.fullPackageName = model.fullPackageName + (model.name ? "." + model.name : "");
+    for (key in model.enums) {
+        var currentEnum = model.enums[key];
+        newDefinitions[currentEnum.name] = "";
+        currentEnum.fullPackageName = model.fullPackageName + (model.name ? "." + model.name : "");
     }
 
-    for (var key in model.fields) {
+    for (key in model.fields) {
         var field = model.fields[key];
         if (typeof newDefinitions[field.type] !== "undefined") {
             field.type = model.name + "." + field.type;
@@ -98,7 +98,7 @@ function generateNames(model, prefix, name) {
 
     // Add the new definitions in the model for generate builders
     var definitions = [];
-    for (var key in newDefinitions) {
+    for (key in newDefinitions) {
         definitions.push({ name: key, type: ((model.name ? (model.name + ".") : "") + key) + newDefinitions[key] });
     }
     model.definitions = definitions;
@@ -113,6 +113,7 @@ loadDustTemplate("builder");
 // Load the json file
 var model = JSON.parse(fs.readFileSync(argv.file).toString());
 
+// If a packagename isn't present, use a default package name
 if (!model.package) {
     model.package = "Proto2TypeScript";
 }
@@ -129,4 +130,4 @@ DustJS.render("module", model, function (err, out) {
         console.log(out);
     }
 });
-
+//# sourceMappingURL=command.js.map
