@@ -39,6 +39,10 @@ DustJS.filters["firstLetterInLowerCase"] = (value : string)=> {
 	return value.charAt(0).toLowerCase() + value.slice(1);
 };
 
+DustJS.filters["camelCase"] = (value: string) => {
+	return value.replace(/(_[a-zA-Z])/g, (match)=> match[1].toUpperCase());
+};
+
 DustJS.filters["convertType"] = (value : string)=> {
 	switch (value.toLowerCase()) {
 	case 'string':
