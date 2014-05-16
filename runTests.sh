@@ -10,7 +10,8 @@ do
 	./node_modules/protobufjs/bin/proto2js $f > $fileName.json
 
 	# Start the program (it should work)
-	node command.js -f $fileName.json > $fileName.d.ts
+	echo "/// <reference path=\"../definitions/bytebuffer.d.ts\" />" > $fileName.d.ts
+	node command.js -f $fileName.json >> $fileName.d.ts
 
 	# Run the TypeScript compiler and let see if it's ok
 	tsc -out /dev/null $fileName.d.ts
