@@ -1,6 +1,5 @@
 declare module {fullPackageName} {
-
-	export enum {name} {
+	export const enum {name} {
 		{#values}{name} = {id},
 		{/values}
 	}
