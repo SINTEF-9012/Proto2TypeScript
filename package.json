@@ -1,6 +1,9 @@
 {
   "name": "Proto2TypeScript",
   "version": "0.1.0",
+  "bin": {
+    "proto2ts": "command.js"
+  },
   "dependencies": {
     "protobufjs": "~2.0.5",
     "dustjs-linkedin": "~2.3.3",
