@@ -76,9 +76,9 @@ DustJS.filters["repeatedType"] = (value : string)=> value == "repeated" ? "[]" :
 
 
 function loadDustTemplate(name : string) : void {
-	var template = fs.readFileSync("./templates/"+name+".dust", "UTF8").toString(),
+	var template = fs.readFileSync(__dirname+"/templates/"+name+".dust", "UTF8").toString(),
 		compiledTemplate = DustJS.compile(template, name);
-	
+
 	DustJS.loadSource(compiledTemplate);
 }
 
@@ -116,7 +116,7 @@ function generateNames (model : any, prefix : string, name : string = "") : void
 	for (key in model.fields) {
 		var field = model.fields[key];
 		if (typeof newDefinitions[field.type] !== "undefined") {
-			
+
 			field.type = model.name + "." + field.type;
 		}
 	}

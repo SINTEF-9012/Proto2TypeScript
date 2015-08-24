@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /// <reference path="./definitions/node.d.ts" />
 /// <reference path="./definitions/dustjs-linkedin.d.ts" />
 var argv = require('optimist').usage('Convert a ProtoBuf.js JSON description in TypeScript definitions.\nUsage: $0').demand('f').alias('f', 'file').describe('f', 'The JSON file').boolean('c').alias('c', 'camelCaseGetSet').describe('c', 'Generate getter and setters in camel case notation').default('c', true).boolean('u').alias('u', 'underscoreGetSet').describe('u', 'Generate getter and setters in underscore notation').default('u', false).boolean('p').alias('p', 'properties').describe('p', 'Generate properties').default('p', true).argv;
@@ -63,7 +65,7 @@ DustJS.filters["repeatedType"] = function (value) {
 };
 
 function loadDustTemplate(name) {
-    var template = fs.readFileSync("./templates/" + name + ".dust", "UTF8").toString(), compiledTemplate = DustJS.compile(template, name);
+    var template = fs.readFileSync(__dirname+"/templates/" + name + ".dust", "UTF8").toString(), compiledTemplate = DustJS.compile(template, name);
 
     DustJS.loadSource(compiledTemplate);
 }
