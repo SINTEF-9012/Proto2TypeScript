@@ -4,8 +4,6 @@
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 // Definitions by: SINTEF-9012 <http://github.com/SINTEF-9012>
 
-/// <reference path="long.d.ts" />
-
 declare class ByteBuffer
 {
     /**
@@ -126,7 +124,7 @@ declare class ByteBuffer
     /**
      * Calculates the actual number of bytes required to store a 64bit base 128 variable-length integer.
      */
-    static calculateVariant64( value: number | Long ): number;
+    // static calculateVariant64( value: number | Long ): number;
 
     /**
      * Concatenates multiple ByteBuffers into one.
@@ -180,7 +178,7 @@ declare class ByteBuffer
     /**
      * Decodes a zigzag encoded signed 64bit integer.
      */
-    static zigZagDecode64( n: number | Long ): Long;
+    // static zigZagDecode64( n: number | Long ): Long;
 
     /**
      * Zigzag encodes a signed 32bit integer so that it can be effectively used with varint encoding.
@@ -190,7 +188,7 @@ declare class ByteBuffer
     /**
      * Zigzag encodes a signed 64bit integer so that it can be effectively used with varint encoding.
      */
-    static zigZagEncode64( n: number | Long ): Long;
+    // static zigZagEncode64( n: number | Long ): Long;
 
     /**
      * Switches (to) big endian byte order.
@@ -341,7 +339,7 @@ declare class ByteBuffer
     /**
      * Reads a 64bit signed integer.
      */
-    readInt64( offset?: number ): Long;
+    // readInt64( offset?: number ): Long;
 
     /**
      * Reads an 8bit signed integer.
@@ -351,7 +349,7 @@ declare class ByteBuffer
     /**
      * Reads a 64bit signed integer. This is an alias of ByteBuffer#readInt64.
      */
-    readLong( offset?: number ): Long;
+    // readLong( offset?: number ): Long;
 
     /**
      * Reads a 16bit signed integer. This is an alias of ByteBuffer#readInt16.
@@ -381,7 +379,7 @@ declare class ByteBuffer
     /**
      * Reads a 64bit unsigned integer.
      */
-    readUint64( offset?: number ): Long;
+    // readUint64( offset?: number ): Long;
     /**
      * Reads an 8bit unsigned integer.
      */
@@ -405,12 +403,12 @@ declare class ByteBuffer
     /**
      * Reads a 64bit base 128 variable-length integer. Requires Long.js.
      */
-    readVarint64( offset?: number ): Long;
+    // readVarint64( offset?: number ): Long;
 
     /**
      * Reads a zig-zag encoded 64bit base 128 variable-length integer. Requires Long.js.
      */
-    readVarint64ZigZag( offset?: number ): Long;
+    // readVarint64ZigZag( offset?: number ): Long;
 
     /**
      * Gets the number of remaining readable bytes. Contents are the bytes between ByteBuffer#offset and ByteBuffer#limit, so this returns limit - offset.
@@ -542,7 +540,7 @@ declare class ByteBuffer
     /**
      * Writes a 64bit signed integer.
      */
-    writeInt64( value: number | Long, offset?: number ): ByteBuffer;
+    // writeInt64( value: number | Long, offset?: number ): ByteBuffer;
 
     /**
      * Writes an 8bit signed integer.
@@ -577,7 +575,7 @@ declare class ByteBuffer
     /**
      * Writes a 64bit unsigned integer.
      */
-    writeUint64( value: number | Long, offset?: number ): ByteBuffer;
+    // writeUint64( value: number | Long, offset?: number ): ByteBuffer;
 
     /**
      * Writes an 8bit unsigned integer.
@@ -602,12 +600,12 @@ declare class ByteBuffer
     /**
      * Writes a 64bit base 128 variable-length integer.
      */
-    writeVarint64( value: number | Long, offset?: number ): ByteBuffer;
+    // writeVarint64( value: number | Long, offset?: number ): ByteBuffer;
 
     /**
      * Writes a zig-zag encoded 64bit base 128 variable-length integer.
      */
-    writeVarint64ZigZag( value: number | Long, offset?: number ): ByteBuffer | number;
+    // writeVarint64ZigZag( value: number | Long, offset?: number ): ByteBuffer | number;
 }
 
 declare module 'bytebuffer' {
