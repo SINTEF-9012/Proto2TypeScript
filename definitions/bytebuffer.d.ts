@@ -1,25 +1,109 @@
-// Type definitions for ByteBuffer.js 2.3.1
-// Project: https://github.com/dcodeIO/ByteBuffer.js
+// Type definitions for ByteBuffer.js 5.0.0
+// Project: https://github.com/dcodeIO/bytebuffer.js
 
-declare class ByteBuffer {
-    constructor(capacity?:number, littleEndian?:boolean);
+/// <reference path="../long/long.d.ts" />
 
-    static BIG_ENDIAN:boolean;
-    static DEFAULT_CAPACITY:number;
-    static LITTLE_ENDIAN:boolean;
-//    static Long?:Long;
-    static MAX_VARINT32_BYTES:number;
-    static MAX_VARINT64_BYTES:number;
-    static VERSION:string;
+declare class ByteBuffer
+{
+    /**
+     * Constructs a new ByteBuffer.
+     */
+    constructor( capacity?: number, littleEndian?: boolean, noAssert?: boolean );
 
-    array:ArrayBuffer;
-    length:number;
-    littleEndian:boolean;
-    markedOffset:number;
-    offset:number;
+    /**
+     * Big endian constant that can be used instead of its boolean value. Evaluates to false.
+     */
+    static BIG_ENDIAN: boolean;
+
+    /**
+     * Default initial capacity of 16.
+     */
+    static DEFAULT_CAPACITY: number;
+
+    /**
+     * Default no assertions flag of false.
+     */
+    static DEFAULT_NOASSERT
+
+    /**
+     * Little endian constant that can be used instead of its boolean value. Evaluates to true.
+     */
+    static LITTLE_ENDIAN: boolean;
+    /**
+     * Maximum number of bytes required to store a 32bit base 128 variable-length integer.
+     */
+    static MAX_VARINT32_BYTES: number;
+    /**
+     * Maximum number of bytes required to store a 64bit base 128 variable-length integer.
+     */
+    static MAX_VARINT64_BYTES: number;
+    /**
+     * Metrics representing number of bytes.Evaluates to 2.
+     */
+    static METRICS_BYTES: number;
+    /**
+     * Metrics representing number of UTF8 characters.Evaluates to 1.
+     */
+    static METRICS_CHARS
+    /**
+     * ByteBuffer version.
+     */
+    static VERSION: string;
+
+    /**
+     * Backing buffer.
+     */
+    buffer: ArrayBuffer;
+
+    /**
+     * Absolute limit of the contained data. Set to the backing buffer's capacity upon allocation.
+     */
+    limit: number;
+
+    /**
+     * Whether to use little endian byte order, defaults to false for big endian.
+     */
+    littleEndian: boolean;
+
+    /**
+     * Marked offset.
+     */
+    markedOffset: number;
+
+    /**
+     * Whether to skip assertions of offsets and values, defaults to false.
+     */
+    noAssert: boolean;
+
+    /**
+     * Absolute read/write offset.
+     */
+    offset: number;
+
+    /**
+     * Data view to manipulate the backing buffer. Becomes null if the backing buffer has a capacity of 0.
+     */
     view:DataView;
 
-    static allocate(capacity?:number, littleEndian?:number):ByteBuffer;
+    /**
+     * Switches (to) big endian byte order.
+     */
+    static BE( bigEndian?: boolean ): ByteBuffer;
+
+    /**
+     * Switches (to) little endian byte order.
+     */
+    static LE( bigEndian?: boolean ): ByteBuffer;
+
+    /**
+     * Appends some data to this ByteBuffer. This will overwrite any contents behind the specified offset up to the appended data's length.
+     */
+    static append( source: ByteBuffer | ArrayBuffer | Uint8Array | string, encoding?: string | number, offset?: number ): ByteBuffer;
+
+    /**
+     * Allocates a new ByteBuffer backed by a buffer of the specified capacity.
+     */
+    static allocate( capacity?: number, littleEndian?: number, noAssert?: boolean ): ByteBuffer;
 
     static calculateUTF8Char(charCode:number):number;
 
@@ -39,23 +123,32 @@ declare class ByteBuffer {
 
     static encodeUTF8Char(charCode:number, dst:ByteBuffer, offset:number):number;
 
-    static wrap(buffer:ArrayBuffer, enc?:string, littleEndian?:boolean):ByteBuffer;
-
-    static wrap(buffer:string, enc?:string, littleEndian?:boolean):ByteBuffer;
+    /**
+     * Wraps a buffer or a string. Sets the allocated ByteBuffer's ByteBuffer#offset to 0 and its ByteBuffer#limit to the length of the wrapped data.
+     * @param buffer Anything that can be wrapped
+     * @param encoding String encoding if buffer is a string ("base64", "hex", "binary", defaults to "utf8")
+     * @param littleEndian Whether to use little or big endian byte order. Defaults to ByteBuffer.DEFAULT_ENDIAN.
+     * @param noAssert Whether to skip assertions of offsets and values. Defaults to ByteBuffer.DEFAULT_NOASSERT.
+     */
+    static wrap( buffer: ByteBuffer | ArrayBuffer | Uint8Array | string, enc?: string | boolean, littleEndian?: boolean, noAssert?: boolean ): ByteBuffer;
 
     static zigZagDecode32(n:number):number;
 
-//    static zigZagDecode64(n:number):Long;
+    static zigZagDecode64(n:number):Long;
 
     static zigZagEncode32(n:number):number;
 
-//    static zigZagEncode64(n:number):Long;
+    static zigZagEncode64(n:number):Long;
 
     append(src:any, offset?:number):ByteBuffer;
 
-    BE(bigEndian?:boolean):ByteBuffer;
+    capacity(): number;
 
-    capacity():number;
+    /**
+     * Clears this ByteBuffer's offsets by setting ByteBuffer#offset to 0 and
+     * ByteBuffer#limit to the backing buffer's capacity. Discards ByteBuffer#markedOffset.
+     */
+    clear(): ByteBuffer;
 
     clone():ByteBuffer;
 
@@ -73,7 +166,9 @@ declare class ByteBuffer {
 
     mark(offset?:number):ByteBuffer;
 
-    prepend(src:any, offset?:number):ByteBuffer;
+    prepend( src: any, offset?: number ): ByteBuffer;
+
+    prependTo( target: ByteBuffer, offset?: number ): ByteBuffer;
 
     printDebug(out?:(string)=>void):void;
 
@@ -97,11 +192,13 @@ declare class ByteBuffer {
 
     readInt32(offset?:number):number;
 
-    readInt64(offset?:number):number;
+    readInt64( offset?: number ): number;
+
+    readIString( offset?: number ): string;
 
     readJSON(offset?:number, parse?:(string)=>void):any;
 
-//    readLong(offset?:number):Long;
+    readLong(offset?:number):Long;
 
     readLString(offset?:number):any;
 
@@ -113,7 +210,7 @@ declare class ByteBuffer {
 
     readUint32(offset?:number):number;
 
-//    readUint64(offset?:number):Long;
+    readUint64(offset?:number):Long;
 
     readUTF8String(chars:number, offset?:number):string;
 
@@ -123,7 +220,7 @@ declare class ByteBuffer {
 
     readVarint32(offset?:number):number;
 
-//    readVarint64(offset?:number):Long;
+    readVarint64(offset?:number):Long;
 
     readVString(offset?:number):string;
 
@@ -131,7 +228,7 @@ declare class ByteBuffer {
 
     readZigZagVarint32(offset?:number):number;
 
-//    readZigZagVarint64(offset?:number):Long;
+    readZigZagVarint64(offset?:number):Long;
 
     remaining():number;
 
@@ -141,13 +238,15 @@ declare class ByteBuffer {
 
     reverse():ByteBuffer;
 
-    slice(begin?:number, end?:number):ByteBuffer;
+    slice( begin?: number, end?: number ): ByteBuffer;
 
-    toArrayBuffer(forceCopy?:boolean):ArrayBuffer;
+    skip( length: number ): ByteBuffer;
+
+    toArrayBuffer( forceCopy?: boolean ): ArrayBuffer;
 
     toBase64():string;
 
-//    toBuffer():Buffer;
+    toBuffer( forceCopy?: boolean ): ArrayBuffer;
 
     toColumns(wrap?:number):string;
 
@@ -177,11 +276,13 @@ declare class ByteBuffer {
 
     writeInt32(value:number, offset?:number):ByteBuffer;
 
-    writeInt64(value:number, offset?:number):ByteBuffer;
+    writeInt64( value: number, offset?: number ): ByteBuffer;
+
+    writeIString( str: string, offset?: number ): ByteBuffer;
 
     writeJSON(data:any, offset?:number, stringify?:any):ByteBuffer;
 
-//    writeLong(value:number, offset?:number):ByteBuffer;
+    writeLong(value:number, offset?:number):ByteBuffer;
 
     writeLString(str:string, offset?:number):ByteBuffer;
 
@@ -210,4 +311,8 @@ declare class ByteBuffer {
     writeZigZagVarint32(value:number, offset?:number):ByteBuffer;
 
     writeZigZagVarint64(value:number, offset?:number):ByteBuffer;
+}
+
+declare module 'bytebuffer' {
+    export = ByteBuffer;
 }
