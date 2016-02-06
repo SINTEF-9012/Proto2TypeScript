@@ -8,8 +8,9 @@
   },
   "dependencies": {
     "optimist": "^0.6.1",
-    "dustjs-linkedin": "^2.3.3",
-    "protobufjs": "^2.0.5"
+    "dustjs-linkedin": "~2.7.2",
+    "protobufjs": "^5.0.0",
+    "dustjs-helpers": "~1.7.3"
   },
   "devDependencies": {
     "expect.js": "~0.3.1",

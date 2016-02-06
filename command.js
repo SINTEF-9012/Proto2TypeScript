@@ -6,7 +6,8 @@ var argv = require('optimist').usage('Convert a ProtoBuf.js JSON description in 
 
 // Import in typescript and commondjs style
 //var ProtoBuf = require("protobufjs");
-var DustJS = require("dustjs-linkedin");
+var DustJS = require("dustjs-helpers");
+
 var fs = require("fs");
 
 // Keep line breaks

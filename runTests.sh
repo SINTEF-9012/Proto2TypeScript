@@ -5,9 +5,9 @@ set -e # abort on the first error
 for f in tests/*.proto
 do
 	fileName=${f%.*}
-	
+
 	# Convert the prototype file
-	./node_modules/protobufjs/bin/proto2js $f > $fileName.json
+	./node_modules/protobufjs/bin/pbjs $f > $fileName.json
 
 	# Start the program (it should work)
 	echo "/// <reference path=\"../definitions/bytebuffer.d.ts\" />" > $fileName.d.ts

@@ -1,12 +1,12 @@
 declare module {fullPackageName} {
 
 	export interface {name} extends ProtoBufModel {
-		{#fields}{#properties}{name}{rule|optionalFieldDeclaration}: {type|convertType}{rule|repeatedType};
-		{/properties}{#camelCaseGetSet}get{name|camelCase|firstLetterInUpperCase}() : {type|convertType}{rule|repeatedType};
-		set{name|camelCase|firstLetterInUpperCase}({name|camelCase|firstLetterInLowerCase} : {type|convertType}{rule|repeatedType}): void;
+		{#fields}{#properties}{name}{rule|optionalFieldDeclaration}: {@eq key=rule value="map"}{~lb} [key: {keytype|convertType}]: {type|convertType} {~rb}{:else}{type|convertType}{rule|repeatedType}{/eq};
+		{/properties}{#camelCaseGetSet}get{name|camelCase|firstLetterInUpperCase}() : {@eq key=rule value="map"}{~lb} [key: {keytype|convertType}]: {type|convertType} {~rb}{:else}{type|convertType}{rule|repeatedType}{/eq};
+		set{name|camelCase|firstLetterInUpperCase}({name|camelCase|firstLetterInLowerCase} : {@eq key=rule value="map"}{~lb} [key: {keytype|convertType}]: {type|convertType} {~rb}{:else}{type|convertType}{rule|repeatedType}{/eq}): void;
 		{/camelCaseGetSet}{#underscoreGetSet}
-		get_{name}() : {type|convertType}{rule|repeatedType};
-		set_{name}({name|firstLetterInLowerCase} : {type|convertType}{rule|repeatedType}): void;
+		get_{name}() : {@eq key=rule value="map"}{~lb} [key: {keytype|convertType}]: {type|convertType} {~rb}{:else}{type|convertType}{rule|repeatedType}{/eq};
+		set_{name}({name|firstLetterInLowerCase} : {@eq key=rule value="map"}{~lb} [key: {keytype|convertType}]: {type|convertType} {~rb}{:else}{type|convertType}{rule|repeatedType}{/eq}): void;
 		{/underscoreGetSet}{/fields}
 	}
 	

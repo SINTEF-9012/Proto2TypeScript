@@ -1,0 +1,5 @@
+message Maps {
+	map<string, string> attr1 = 1;
+	optional string attr2 = 2;
+	repeated string attr3 = 3;
+}
