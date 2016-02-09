@@ -1,7 +1,7 @@
 declare module {fullPackageName} {
 
 	export interface {name} extends ProtoBufModel {
-		{#fields}{#properties}{name}{rule|optionalFieldDeclaration}: {@eq key=rule value="map"}{~lb} [key: {keytype|convertType}]: {type|convertType} {~rb}{:else}{type|convertType}{rule|repeatedType}{/eq};
+		{#fields}{#properties}{name}?: {@eq key=rule value="map"}{~lb} [key: {keytype|convertType}]: {type|convertType} {~rb}{:else}{type|convertType}{rule|repeatedType}{/eq};
 		{/properties}{#camelCaseGetSet}get{name|camelCase|firstLetterInUpperCase}() : {@eq key=rule value="map"}{~lb} [key: {keytype|convertType}]: {type|convertType} {~rb}{:else}{type|convertType}{rule|repeatedType}{/eq};
 		set{name|camelCase|firstLetterInUpperCase}({name|camelCase|firstLetterInLowerCase} : {@eq key=rule value="map"}{~lb} [key: {keytype|convertType}]: {type|convertType} {~rb}{:else}{type|convertType}{rule|repeatedType}{/eq}): void;
 		{/camelCaseGetSet}{#underscoreGetSet}
