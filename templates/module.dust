@@ -11,6 +11,14 @@ declare module {package} {
 		{#definitions}{name}: {type};
 		{/definitions}
 	}
+	
+    export interface Map<TK, TV> {
+        clear(): void;
+        delete(key: TK);
+        get(key: TK): TV;
+        has(key: TK): boolean;
+        set(key: TK, value: TV): void;
+    }
 }
 {#messages}
 {>interface:./}{/messages}{#enums}
