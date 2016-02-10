@@ -10,10 +10,6 @@ declare module {fullPackageName} {
 		{/underscoreGetSet}{/fields}
 	}
 	
-	export interface {name}Message extends {name} {
-		
-	}
-	
 	{>builder:./}	
 }
 {#messages}
