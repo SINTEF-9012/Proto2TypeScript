@@ -1,11 +1,5 @@
 declare module {package} {
-	interface ProtoBufModel {
-		toArrayBuffer(): ArrayBuffer;
-		//toBuffer(): NodeBuffer;
-		//encode(): ByteBuffer;
-		toBase64(): string;
-		toString(): string;
-	}
+	
 	
 	interface ProtoBufMapItem<KeyType, ValueType> {
 		key : KeyType,

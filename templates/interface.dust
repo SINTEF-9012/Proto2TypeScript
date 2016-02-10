@@ -1,6 +1,6 @@
 declare module {fullPackageName} {
 	
-	export interface {name} extends ProtoBufModel {
+	export interface {name} {
 	
 		{#fields}
 		
