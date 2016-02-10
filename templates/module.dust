@@ -1,11 +1,4 @@
 declare module {package} {
-	interface ProtoBufModel {
-		toArrayBuffer(): ArrayBuffer;
-		//toBuffer(): NodeBuffer;
-		//encode(): ByteBuffer;
-		toBase64(): string;
-		toString(): string;
-	}
 
 	export interface ProtoBufBuilder {
 		{#definitions}{name}: {type};
@@ -18,6 +11,8 @@ declare module {package} {
         get(key: TK): TV;
         has(key: TK): boolean;
         set(key: TK, value: TV): void;
+        forEach(fn: (value: TV, key?: TK) => void);
+        size: number;
     }
 }
 {#messages}

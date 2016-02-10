@@ -1,6 +1,6 @@
 declare module {fullPackageName} {
 
-	export interface {name} extends ProtoBufModel {
+	export interface {name} {
 		{#fields}{#properties}{name}?: {@eq key=rule value="map"}Map<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq};
 		{/properties}{#camelCaseGetSet}get{name|camelCase|firstLetterInUpperCase}() : {@eq key=rule value="map"}Map<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq};
 		set{name|camelCase|firstLetterInUpperCase}({name|camelCase|firstLetterInLowerCase} : {@eq key=rule value="map"}Map<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq}): void;
@@ -8,6 +8,10 @@ declare module {fullPackageName} {
 		get_{name}() : {@eq key=rule value="map"}Map<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq};
 		set_{name}({name|firstLetterInLowerCase} : {@eq key=rule value="map"}Map<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq}): void;
 		{/underscoreGetSet}{/fields}
+	}
+	
+	export interface {name}Message extends {name} {
+		
 	}
 	
 	{>builder:./}	

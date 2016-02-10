@@ -1,9 +1,18 @@
+	
+export interface {name}Message extends {name} {
+	toArrayBuffer(): ArrayBuffer;
+	//toBuffer(): NodeBuffer;
+	//encode(): ByteBuffer;
+	toBase64(): string;
+	toString(): string;
+}
+
 export interface {name}Builder {
-		new(): {name};
-		decode(buffer: ArrayBuffer) : {name};
-		//decode(buffer: NodeBuffer) : {name};
-		//decode(buffer: ByteArrayBuffer) : {name};
-		decode64(buffer: string) : {name};
-		{#definitions}{name}: {type};
-		{/definitions}
-	}
+	new(data?: {name}): {name}Message;
+	decode(buffer: ArrayBuffer) : {name}Message;
+	//decode(buffer: NodeBuffer) : {name}Message;
+	//decode(buffer: ByteArrayBuffer) : {name}Message;
+	decode64(buffer: string) : {name};
+	{#definitions}{name}: {type};
+	{/definitions}
+}
