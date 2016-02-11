@@ -120,6 +120,13 @@ function generateNames (model : any, prefix : string, name : string = "") : void
 			field.type = model.name + "." + field.type;
 		}
 	}
+	
+	model.oneofsArray = [];
+	
+	for (key in model.oneofs) {
+		var oneof = model.oneofs[key];
+		model.oneofsArray.push({name: key, value: oneof});
+	}
 
 	// Add the new definitions in the model for generate builders
 	var definitions: any[] = [];
