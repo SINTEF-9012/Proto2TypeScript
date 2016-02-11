@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+message ContainsOneof {
+	oneof something {
+		string the_string = 1;
+		double the_number = 2;
+	}
+}

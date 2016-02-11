@@ -7,7 +7,8 @@ declare module {fullPackageName} {
 		{/camelCaseGetSet}{#underscoreGetSet}
 		get_{name}() : {type|convertType}{rule|repeatedType};
 		set_{name}({name|firstLetterInLowerCase} : {type|convertType}{rule|repeatedType}): void;
-		{/underscoreGetSet}{/fields}
+		{/underscoreGetSet}{/fields}{#oneofsArray}{name}?: string
+		{/oneofsArray}
 	}
 	
 	{>builder:./}	
