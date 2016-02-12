@@ -13,7 +13,7 @@
 // Fell free to include other methods. If possible let me know about.
 //
 
-declare module "dustjs-linkedin" {
+declare module "dustjs-helpers" {
 
     var optimizers : any;
     /**

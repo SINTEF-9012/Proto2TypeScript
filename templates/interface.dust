@@ -1,13 +1,25 @@
 declare module {fullPackageName} {
 
 	export interface {name} extends ProtoBufModel {
-		{#fields}{#properties}{name}{rule|optionalFieldDeclaration}: {type|convertType}{rule|repeatedType};
-		{/properties}{#camelCaseGetSet}get{name|camelCase|firstLetterInUpperCase}() : {type|convertType}{rule|repeatedType};
+		{#fields}
+		{#properties}
+		{@eq key=rule value="map"}
+		{name}: ProtoBufMap<{keytype|convertType}, {type|convertType}>;
+		{:else}
+		{name}{rule|optionalFieldDeclaration}: {type|convertType}{rule|repeatedType};
+		{/eq}
+		{/properties}
+		{#camelCaseGetSet}
+		get{name|camelCase|firstLetterInUpperCase}() : {type|convertType}{rule|repeatedType};
 		set{name|camelCase|firstLetterInUpperCase}({name|camelCase|firstLetterInLowerCase} : {type|convertType}{rule|repeatedType}): void;
-		{/camelCaseGetSet}{#underscoreGetSet}
+		{/camelCaseGetSet}
+		{#underscoreGetSet}
 		get_{name}() : {type|convertType}{rule|repeatedType};
 		set_{name}({name|firstLetterInLowerCase} : {type|convertType}{rule|repeatedType}): void;
-		{/underscoreGetSet}{/fields}{#oneofsArray}{name}?: string
+		{/underscoreGetSet}
+		{/fields}
+		{#oneofsArray}
+		{name}?: string
 		{/oneofsArray}
 	}
 	

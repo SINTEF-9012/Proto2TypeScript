@@ -1,5 +1,5 @@
 /// <reference path="./definitions/node.d.ts" />
-/// <reference path="./definitions/dustjs-linkedin.d.ts" />
+/// <reference path="./definitions/dustjs-helpers.d.ts" />
 
 var argv = require('optimist')
 	.usage('Convert a ProtoBuf.js JSON description in TypeScript definitions.\nUsage: $0')
@@ -23,7 +23,7 @@ var argv = require('optimist')
 
 // Import in typescript and commondjs style
 //var ProtoBuf = require("protobufjs");
-import DustJS = require("dustjs-linkedin");
+import DustJS = require("dustjs-helpers");
 import fs = require("fs");
 
 // Keep line breaks
