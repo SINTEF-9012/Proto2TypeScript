@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /// <reference path="./definitions/node.d.ts" />
 /// <reference path="./definitions/dustjs-helpers.d.ts" />
 

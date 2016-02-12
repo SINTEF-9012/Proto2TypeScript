@@ -1,5 +1,4 @@
-/// <reference path="./definitions/node.d.ts" />
-/// <reference path="./definitions/dustjs-helpers.d.ts" />
+#!/usr/bin/env node
 "use strict";
 var argv = require('optimist')
     .usage('Convert a ProtoBuf.js JSON description in TypeScript definitions.\nUsage: $0')
