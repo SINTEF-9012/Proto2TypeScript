@@ -55,16 +55,17 @@ DustJS.filters["convertType"] = (value : string)=> {
 	case 'double':
 	case 'float':
 	case 'int32':
-	case 'int64':
 	case 'uint32':
-	case 'uint64':
 	case 'sint32':
-	case 'sint64':
 	case 'fixed32':
-	case 'fixed64':
 	case 'sfixed32':
-	case 'sfixed64':
 		return "number";
+	case 'int64':
+	case 'uint64':
+	case 'sint64':
+	case 'fixed64':
+	case 'sfixed64':
+		return "Long";
 	}
 
 	// By default, it's a message identifier
