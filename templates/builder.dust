@@ -1,5 +1,6 @@
 export interface {name}Builder {
 		new(): {name};
+		new(copyFrom: {name}): {name};
 		decode(buffer: ArrayBuffer) : {name};
 		//decode(buffer: NodeBuffer) : {name};
 		//decode(buffer: ByteArrayBuffer) : {name};
