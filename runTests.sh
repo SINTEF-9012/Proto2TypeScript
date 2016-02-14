@@ -9,18 +9,18 @@ for f in tests/*.proto
 do
 	fileName=${f%.*}
 	
-	echo "Running pbjs $f"
-	
 	# Convert the prototype file
+	echo "Running pbjs $f"
 	./node_modules/protobufjs/bin/pbjs $f > $fileName.json
 
-	echo "Running command.js $fileName.json"
-
 	# Start the program (it should work)
+	echo "Running command.js $fileName.json"
 	echo "/// <reference path=\"../definitions/bytebuffer.d.ts\" />" > $fileName.d.ts
+	echo "/// <reference path=\"../definitions/long.d.ts\" />" >> $fileName.d.ts
 	node command.js -f $fileName.json >> $fileName.d.ts
 
 	# Run the TypeScript compiler and let see if it's ok
+	echo "Running tsc $fileName.d.ts"
 	$TSC -out /dev/null $fileName.d.ts
 done
 
