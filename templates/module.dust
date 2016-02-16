@@ -14,11 +14,11 @@ declare module {package} {
 	
 	interface ProtoBufMap<KeyType, ValueType> {
 		clear(): void;
-		delete(key: KeyType);
+		delete(key: KeyType): void;
 		get(key: KeyType): ValueType;
 		has(key: KeyType): boolean;
 		set(key: KeyType, value: ValueType): void;
-		forEach(fn: (value: ValueType, key?: KeyType) => void);
+		forEach(fn: (value: ValueType, key?: KeyType) => void): void;
 		size: number;
 		map : { [key: string]: ProtoBufMapItem<KeyType, ValueType> }
 	}
