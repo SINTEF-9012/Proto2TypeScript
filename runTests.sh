@@ -21,7 +21,7 @@ do
 
 	# Run the TypeScript compiler and let see if it's ok
 	echo "Running tsc $fileName.d.ts"
-	$TSC -out /dev/null $fileName.d.ts
+	$TSC --noImplicitAny -out /dev/null $fileName.d.ts
 done
 
 echo "Conversion OK"
