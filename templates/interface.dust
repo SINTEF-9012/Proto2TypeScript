@@ -9,13 +9,13 @@ declare module {fullPackageName} {
 		{/properties}
 		
 		{#camelCaseGetSet}
-		get{name|camelCase|firstLetterInUpperCase}() : {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq};
-		set{name|camelCase|firstLetterInUpperCase}({name|camelCase|firstLetterInLowerCase} : {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq}): void;
+		get{name|camelCase|firstLetterInUpperCase}?() : {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq};
+		set{name|camelCase|firstLetterInUpperCase}?({name|camelCase|firstLetterInLowerCase} : {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq}): void;
 		{/camelCaseGetSet}
 		
 		{#underscoreGetSet}
-		get_{name}() : {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq};
-		set_{name}({name|firstLetterInLowerCase} : {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq}): void;
+		get_{name}?() : {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq};
+		set_{name}?({name|firstLetterInLowerCase} : {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq}): void;
 		{/underscoreGetSet}
 		
 		{/fields}
