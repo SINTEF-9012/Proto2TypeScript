@@ -19,6 +19,9 @@ var argv = require('optimist')
     .alias('p', 'properties')
     .describe('p', 'Generate properties')
     .default('p', true)
+	.boolean('camelCaseProperties')
+    .describe('camelCaseProperties', 'Generate properties with camel case (either this or underscores - can’t be both)')
+    .default('camelCaseProperties', false)
     .argv;
 
 
@@ -92,6 +95,7 @@ function generateNames (model : any, prefix : string, name : string = "") : void
 
 	// Copies the settings (I'm lazy)
 	model.properties = argv.properties;
+	model.camelCaseProperties = argv.camelCaseProperties;
 	model.camelCaseGetSet = argv.camelCaseGetSet;
 	model.underscoreGetSet = argv.underscoreGetSet;
 
