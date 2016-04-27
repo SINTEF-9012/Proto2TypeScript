@@ -1,12 +1,22 @@
 declare module {package} {
-	interface ProtoBufModel {
-		toArrayBuffer(): ArrayBuffer;
-		//toBuffer(): NodeBuffer;
-		//encode(): ByteBuffer;
-		toBase64(): string;
-		toString(): string;
+	
+	
+	interface ProtoBufMapItem<KeyType, ValueType> {
+		key : KeyType,
+		value : ValueType
 	}
-
+	
+	interface ProtoBufMap<KeyType, ValueType> {
+		clear(): void;
+		delete(key: KeyType): void;
+		get(key: KeyType): ValueType;
+		has(key: KeyType): boolean;
+		set(key: KeyType, value: ValueType): void;
+		forEach(fn: (value: ValueType, key?: KeyType) => void): void;
+		size: number;
+		map : { [key: string]: ProtoBufMapItem<KeyType, ValueType> }
+	}
+	
 	export interface ProtoBufBuilder {
 		{#definitions}{name}: {type};
 		{/definitions}

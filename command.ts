@@ -1,5 +1,6 @@
+#!/usr/bin/env node
 /// <reference path="./definitions/node.d.ts" />
-/// <reference path="./definitions/dustjs-linkedin.d.ts" />
+/// <reference path="./definitions/dustjs-helpers.d.ts" />
 
 var argv = require('optimist')
 	.usage('Convert a ProtoBuf.js JSON description in TypeScript definitions.\nUsage: $0')
@@ -18,12 +19,15 @@ var argv = require('optimist')
     .alias('p', 'properties')
     .describe('p', 'Generate properties')
     .default('p', true)
+	.boolean('camelCaseProperties')
+    .describe('camelCaseProperties', 'Generate properties with camel case (either this or underscores - can’t be both)')
+    .default('camelCaseProperties', false)
     .argv;
 
 
 // Import in typescript and commondjs style
 //var ProtoBuf = require("protobufjs");
-import DustJS = require("dustjs-linkedin");
+import DustJS = require("dustjs-helpers");
 import fs = require("fs");
 
 // Keep line breaks
@@ -54,16 +58,17 @@ DustJS.filters["convertType"] = (value : string)=> {
 	case 'double':
 	case 'float':
 	case 'int32':
-	case 'int64':
 	case 'uint32':
-	case 'uint64':
 	case 'sint32':
-	case 'sint64':
 	case 'fixed32':
-	case 'fixed64':
 	case 'sfixed32':
-	case 'sfixed64':
 		return "number";
+	case 'int64':
+	case 'uint64':
+	case 'sint64':
+	case 'fixed64':
+	case 'sfixed64':
+		return "Long";
 	}
 
 	// By default, it's a message identifier
@@ -90,6 +95,7 @@ function generateNames (model : any, prefix : string, name : string = "") : void
 
 	// Copies the settings (I'm lazy)
 	model.properties = argv.properties;
+	model.camelCaseProperties = argv.camelCaseProperties;
 	model.camelCaseGetSet = argv.camelCaseGetSet;
 	model.underscoreGetSet = argv.underscoreGetSet;
 

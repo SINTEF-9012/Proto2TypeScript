@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message ContainsMap {
+	
+	message Nested {
+		string title = 1;
+		double some_number = 2;
+	}
+	
+	map<string, Nested> things = 1;
+	
+	string regular_old_string = 2;
+}
