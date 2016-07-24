@@ -1,31 +1,31 @@
 declare module {fullPackageName} {
-	
+
 	export interface {name} {
-	
+
 		{#fields}
-		
+
 		{#properties}
 		{#camelCaseProperties}{name|camelCase}{:else}{name}{/camelCaseProperties}?: {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq};
 		{/properties}
-		
+
 		{#camelCaseGetSet}
 		get{name|camelCase|firstLetterInUpperCase}?() : {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq};
 		set{name|camelCase|firstLetterInUpperCase}?({name|camelCase|firstLetterInLowerCase} : {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq}): void;
 		{/camelCaseGetSet}
-		
+
 		{#underscoreGetSet}
 		get_{name}?() : {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq};
 		set_{name}?({name|firstLetterInLowerCase} : {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq}): void;
 		{/underscoreGetSet}
-		
+
 		{/fields}
-		
+
 		{#oneofsArray}
 		{name}?: string
 		{/oneofsArray}
 	}
-	
-	{>builder:./}	
+
+	{>builder:./}
 }
 {#messages}
 {>interface:./}{/messages}{#enums}
