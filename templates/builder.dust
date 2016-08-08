@@ -1,16 +1,36 @@
 export interface {name}Message extends {name} {
-	toArrayBuffer(): ArrayBuffer;
-	encode(): ByteBuffer;
+	add(key: string, value: any, noAssert?: boolean): {name}Message;
+	calculate(): number;
+	encode64(): string;
+	encodeAB(): ArrayBuffer;
+	encodeDelimited(buffer?: ByteBuffer, noVerify?: boolean): ByteBuffer;
+	encodeDelimited(buffer?: boolean, noVerify?: boolean): ByteBuffer;
+	encodeHex(): string;
 	encodeJSON(): string;
+	encodeNB(): Buffer;
+	get(key: string, noAssert: boolean): any;
+	set(keyOrObj: string, value: any | boolean, noAssert: boolean): {name}Message;
+	toArrayBuffer(): ArrayBuffer;
 	toBase64(): string;
+	toBuffer(): Buffer;
+	toHex(): string;
+	toRaw(): any;
 	toString(): string;
 }
 
 export interface {name}Builder {
 	new(data?: {name}): {name}Message;
-	decode(buffer: ArrayBuffer) : {name}Message;
-	decode(buffer: ByteBuffer) : {name}Message;
-	decode64(buffer: string) : {name}Message;
+	decode(buffer: ArrayBuffer, length?: number | string, enc?: string) : {name}Message;
+	decode(buffer: ByteBuffer, length?: number | string, enc?: string) : {name}Message;
+	decode(buffer: Buffer, length?: number | string, enc?: string) : {name}Message;
+	decode(buffer: string, length?: number | string, enc?: string) : {name}Message;
+	decode64(str: string) : {name}Message;
+	decodeDelimited(buffer: ArrayBuffer, enc: string): {name}Message;
+	decodeDelimited(buffer: ByteBuffer, enc: string): {name}Message;
+	decodeDelimited(buffer: Buffer, enc: string): {name}Message;
+	decodeDelimited(buffer: string, enc: string): {name}Message;
+	decodeHex(str: string): {name}Message;
+	decodeJSON(str: string): {name}Message;
 	{#definitions}{name}: {type};
 	{/definitions}
 }
