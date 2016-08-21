@@ -13,6 +13,10 @@ var argv = require('optimist')
     .alias('u', 'underscoreGetSet')
     .describe('u', 'Generate getter and setters in underscore notation')
     .default('u', false)
+    .boolean('b')
+    .alias('b', 'generateBuilders')
+    .describe('b', 'Generate ~Builder and ~Message definitions')
+    .default('b', true)
     .boolean('p')
     .alias('p', 'properties')
     .describe('p', 'Generate properties')
@@ -78,6 +82,7 @@ function generateNames(model, prefix, name) {
     model.camelCaseProperties = argv.camelCaseProperties;
     model.camelCaseGetSet = argv.camelCaseGetSet;
     model.underscoreGetSet = argv.underscoreGetSet;
+    model.generateBuilders = argv.generateBuilders;
     var newDefinitions = {};
     // Generate names for messages
     // Recursive call for all messages

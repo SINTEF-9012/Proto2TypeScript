@@ -25,7 +25,7 @@ declare module {fullPackageName} {
 		{/oneofsArray}
 	}
 
-	{>builder:./}
+	{?generateBuilders}{>builder:./}{/generateBuilders}
 }
 {#messages}
 {>interface:./}{/messages}{#enums}
