@@ -17,10 +17,10 @@ declare module {package} {
 		map : { [key: string]: ProtoBufMapItem<KeyType, ValueType> }
 	}
 	
-	export interface ProtoBufBuilder {
+	{?generateBuilders}export interface ProtoBufBuilder {
 		{#definitions}{name}: {type};
 		{/definitions}
-	}
+	}{/generateBuilders}
 }
 {#messages}
 {>interface:./}{/messages}{#enums}
