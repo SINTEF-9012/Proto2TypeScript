@@ -15,11 +15,15 @@ var argv = require('optimist')
     .alias('u', 'underscoreGetSet')
     .describe('u', 'Generate getter and setters in underscore notation')
     .default('u', false)
+    .boolean('b')
+    .alias('b', 'generateBuilders')
+    .describe('b', 'Generate ~Builder and ~Message definitions')
+    .default('b', true)
     .boolean('p')
     .alias('p', 'properties')
     .describe('p', 'Generate properties')
     .default('p', true)
-	.boolean('camelCaseProperties')
+    .boolean('camelCaseProperties')
     .describe('camelCaseProperties', 'Generate properties with camel case (either this or underscores - can’t be both)')
     .default('camelCaseProperties', false)
     .argv;
@@ -98,6 +102,7 @@ function generateNames (model : any, prefix : string, name : string = "") : void
 	model.camelCaseProperties = argv.camelCaseProperties;
 	model.camelCaseGetSet = argv.camelCaseGetSet;
 	model.underscoreGetSet = argv.underscoreGetSet;
+	model.generateBuilders = argv.generateBuilders;
 
 	var newDefinitions = {};
 
