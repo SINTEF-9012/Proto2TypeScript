@@ -17,6 +17,7 @@ do
 	echo "Running command.js $fileName.json"
 	echo "/// <reference path=\"../definitions/bytebuffer.d.ts\" />" > $fileName.d.ts
 	echo "/// <reference path=\"../definitions/long.d.ts\" />" >> $fileName.d.ts
+	echo "/// <reference path=\"../definitions/node.d.ts\" />" >> $fileName.d.ts
 	node command.js -f $fileName.json >> $fileName.d.ts
 
 	# Run the TypeScript compiler and let see if it's ok

@@ -8,7 +8,7 @@ declare module {package} {
 	
 	interface ProtoBufMap<KeyType, ValueType> {
 		clear(): void;
-		delete(key: KeyType): void;
+		delete(key: KeyType): boolean;
 		get(key: KeyType): ValueType;
 		has(key: KeyType): boolean;
 		set(key: KeyType, value: ValueType): void;
