@@ -26,6 +26,9 @@ var argv = require('optimist')
     .boolean('camelCaseProperties')
     .describe('camelCaseProperties', 'Generate properties with camel case (either this or underscores - can’t be both)')
     .default('camelCaseProperties', false)
+    .string('t')
+    .alias('t', 'templateDir')
+    .default('t', __dirname)
     .argv;
 
 
@@ -85,7 +88,7 @@ DustJS.filters["repeatedType"] = (value : string)=> value == "repeated" ? "[]" :
 
 
 function loadDustTemplate(name : string) : void {
-	var template = fs.readFileSync(__dirname+"/templates/"+name+".dust", "UTF8").toString(),
+	var template = fs.readFileSync(argv.templateDir+"/templates/"+name+".dust", "UTF8").toString(),
 		compiledTemplate = DustJS.compile(template, name);
 
 	DustJS.loadSource(compiledTemplate);

@@ -24,6 +24,9 @@ var argv = require('optimist')
     .boolean('camelCaseProperties')
     .describe('camelCaseProperties', 'Generate properties with camel case (either this or underscores - can’t be both)')
     .default('camelCaseProperties', false)
+    .string('t')
+    .alias('t', 'templateDir')
+    .default('t', __dirname)
     .argv;
 // Import in typescript and commondjs style
 //var ProtoBuf = require("protobufjs");
@@ -70,7 +73,7 @@ DustJS.filters["convertType"] = function (value) {
 DustJS.filters["optionalFieldDeclaration"] = function (value) { return value == "optional" ? "?" : ""; };
 DustJS.filters["repeatedType"] = function (value) { return value == "repeated" ? "[]" : ""; };
 function loadDustTemplate(name) {
-    var template = fs.readFileSync(__dirname + "/templates/" + name + ".dust", "UTF8").toString(), compiledTemplate = DustJS.compile(template, name);
+    var template = fs.readFileSync(argv.templateDir + "/templates/" + name + ".dust", "UTF8").toString(), compiledTemplate = DustJS.compile(template, name);
     DustJS.loadSource(compiledTemplate);
 }
 // Generate the names for the model, the types, and the interfaces
