@@ -22,6 +22,7 @@ Options:
   -c, --camelCaseGetSet   Generate getter and setters in camel case notation  [default: true]
   -u, --underscoreGetSet  Generate getter and setters in underscore notation  [default: false]
   -p, --properties        Generate properties                                 [default: true]
+  -t, --templateDir       Template directory                                  [default: __dirname]
 ```
 
 ### Why ?
