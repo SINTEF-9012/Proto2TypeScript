@@ -8,8 +8,8 @@ This tool generate TypeScript definitions for your Protocol Buffers models, when
 # Install the dependencies
 npm install --production
 
-# Parse and convert the proto file to json using proto2js (from ProtoBuf.js)
-node_modules/protobufjs/bin/proto2js model.proto > model.json
+# Parse and convert the proto file to json using pbjs (from ProtoBuf.js)
+node_modules/protobufjs/bin/pbjs model.proto > model.json
 
 # Convert the model to TypeScript definitions
 node command.js --file model.json > model.d.ts
