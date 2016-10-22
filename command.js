@@ -21,6 +21,9 @@ var argv = require('optimist')
     .alias('p', 'properties')
     .describe('p', 'Generate properties')
     .default('p', true)
+    .boolean('explicitRequired')
+    .describe('explicitRequired', 'Mark required properties an required in interfaces')
+    .default('explicitRequired', false)
     .boolean('camelCaseProperties')
     .describe('camelCaseProperties', 'Generate properties with camel case (either this or underscores - can’t be both)')
     .default('camelCaseProperties', false)
@@ -82,6 +85,7 @@ function generateNames(model, prefix, name) {
     model.fullPackageName = prefix + (name != "." ? name : "");
     // Copies the settings (I'm lazy)
     model.properties = argv.properties;
+    model.explicitRequired = argv.explicitRequired;
     model.camelCaseProperties = argv.camelCaseProperties;
     model.camelCaseGetSet = argv.camelCaseGetSet;
     model.underscoreGetSet = argv.underscoreGetSet;
