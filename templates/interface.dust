@@ -5,7 +5,7 @@ declare module {fullPackageName} {
 		{#fields}
 
 		{#properties}
-		{#camelCaseProperties}{name|camelCase}{:else}{name}{/camelCaseProperties}?: {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq};
+		{#camelCaseProperties}{name|camelCase}{:else}{name}{/camelCaseProperties}{#explicitRequired}{@eq key=rule value="optional"}?{/eq}{:else}?{/explicitRequired}: {@eq key=rule value="map"}ProtoBufMap<{keytype|convertType}, {type|convertType}>{:else}{type|convertType}{rule|repeatedType}{/eq};
 		{/properties}
 
 		{#camelCaseGetSet}
